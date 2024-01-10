@@ -3,6 +3,9 @@
 # git clone 
 # and follow 6 steps
 
+# 0. download selenium
+pip install selenium
+
 # 1. you need to make .txt file to save your intra42 password
 #########################################################
 #########################################################
