@@ -62,7 +62,7 @@ username = "hongbaki"
 username_field_id = "username"  # Replace with the actual ID of the username field
 password_field_id = "password"  # Replace with the actual ID of the password field
 
-with open("password.txt", "r") as password_file:
+with open("../../../password.txt", "r") as password_file:
     password = password_file.read().strip()
 
 # Navigate to the login page
@@ -250,16 +250,30 @@ while not slot_clicked and attempts < max_retries:
                 continue
             
 
-            time.sleep(2)
-
             for slot in available_slots_today:
                 print("40")
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable(slot))
+                WebDriverWait(driver, 3).until(EC.element_to_be_clickable(slot))
                 print("41")
                 slot.click()
                 print("Clicked on an available slot.")
                 slot_clicked = True
-                break
+                
+                time.sleep(5)
+                # Find the "OK" button. Adjust the selector as per your page's structure
+                try:
+                    nextok = driver.find_element(By.CSS_SELECTOR, "button.btn.btn-primary")
+                    if nextok.text == "OK":
+                        
+                        ###########last
+                        #nextok.click()
+                        print("Clicked 'OK' button.")
+                except NoSuchElementException:
+                    print("OK button not found.")
+                    
+                    
+                    
+                
+                #break
 
         except NoSuchElementException:
             print("Today's column is not found or not highlighted.")
@@ -273,7 +287,7 @@ while not slot_clicked and attempts < max_retries:
         print(f"An unexpected error occurred: {e}")
         break
 
-    time.sleep(3)
+    time.sleep(2)
 
 if attempts >= max_retries:
     print("Reached the maximum number of retries. Exiting.")
@@ -283,113 +297,6 @@ if attempts >= max_retries:
 
 
 time.sleep(20)
-
-# while not slot_clicked and attempts < max_retries:
-#     try:
-#         attempts += 1  # Increment the attempt counter
-#         print(f"Attempt {attempts} of {max_retries}")
-
-#         # Wait until the slots are present on the page
-#         slots = WebDriverWait(driver, 3).until(
-#             EC.presence_of_all_elements_located((By.CLASS_NAME, "fc-title"))
-#         )
-#         # Check each slot to see if it is available and matches the desired time
-#         for slot in slots:
-#             print("00")
-            
-#             slot_text = slot.text.strip()
-#             if "Available" in slot_text:
-#                 print("10")
-
-                  
-#                 slot_start_time_elements = driver.find_elements(By.CLASS_NAME, "fc-time")                  
-#                 print("12")
-
-#                 for slot_start_time_element in slot_start_time_elements:
-#                     print("20")
-#                     slot_start_time_str = slot_start_time_element.get_attribute("data-full")
-                    
-#                     if slot_start_time_str:
-#                         # Extract only the time part, assuming format like "6:30 PM - 7:15 PM"
-#                         time_part = slot_start_time_str.split(" - ")[0]
-#                         # Convert to 24-hour format
-#                         slot_start_time_24hr = convert_to_24hr_format(time_part)
-#                         if slot_start_time_24hr:
-#                             print("30")
-                            
-#                             slot_start_time = datetime.strptime(slot_start_time_24hr, "%H:%M").time()
-
-#                             print("31")
-                            
-#                             print("desired_start_time")
-#                             print(desired_start_time)
-#                             print("slot_start_time")
-#                             print(slot_start_time)
-#                             print("desired_end_time")
-#                             print(desired_end_time)
-                        
-#                             if (desired_start_time <= slot_start_time <= desired_end_time):
-#                                 print("40")
-#                                 # Assuming you have already loaded the HTML page and have it in a variable called 'html_content'
-#                                 # You can extract the desired date as follows:
-
-
-#                                 #i want to implement with data.
-#                                 #but I dont know how to implement
-#                                 #idea is desired_date should be same 
-#                                 html_content = driver.page_source
-#                                 soup = BeautifulSoup(html_content, 'html.parser')
-#                                 if soup:
-#                                     print("soup is available")
-#                                 else:
-#                                     print("soup has not found")
-#                                 # Find a <td> element with a class that contains 'fc-state-highlight'
-#                                 highlighted_td = soup.select_one('td[class*="fc-state-highlight"]')
-
-#                                 # Check if the element exists and has the 'data-date' attribute
-#                                 if highlighted_td:
-#                                     desired_day = highlighted_td.get('data-date')
-#                                     print(f"The desired day is: {desired_day}")
-#                                 else:
-#                                     print("Desired day not found in the HTML.")
-                                
-                                
-#                                 # if (desired_day == )
-
-#                                 #     print(f"Found a matching slot: {slot_text}. Attempting to click...")
-                                    
-#                                 #     slot.click()
-#                                 #     print("Clicked on the matching slot.")
-#                                 #     slot_clicked = True
-#                                 #     break
-#                                 # else:
-#                                 #     print("desired_day == ????????")
-#                 if slot_clicked:
-#                     break
-#         if not slot_clicked:
-#             print("No matching slots found. Refreshing and retrying...")
-#             driver.refresh()        
-
-#     except TimeoutException:
-#         print("Timeout occurred while looking for slots. Refreshing and retrying...")
-#         driver.refresh()
-#     except NoSuchElementException:
-#         print("The slot element was not found. Refreshing and retrying...")
-#         driver.refresh()
-#     except Exception as e:
-#         print(f"An unexpected error occurred: {e}")
-#         break  # Exit the loop on unexpected errors
-
-#     # Add a delay before the next attempt to prevent overwhelming the server
-#     time.sleep(5)
-
-# # Check if the loop ended due to reaching the maximum number of retries
-# if attempts >= max_retries:
-#     print("Reached the maximum number of retries. Exiting.")
-
-# # Add code here to handle confirmation of booking if needed
-
-# # ... rest of your script ...
 
 # Close the WebDriver
 #8.Close the WebDriver:
