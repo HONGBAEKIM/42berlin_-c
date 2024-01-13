@@ -29,11 +29,21 @@
 
 # include "Location.hpp"
 
+////////////////////////////////////<hb1>////////////
+#include <fcntl.h> // for fcntl()
+#include <unistd.h> // for close(), read()
+#include <poll.h> // for poll()
+////////////////////////////////////<hb2>////////////
+
 class Location;
 
 class Server
 {
 	private:
+		////////////////////////////////////<hb1>////////////
+		int server_fd;  // socket file descriptor
+		////////////////////////////////////<hb2>////////////
+
 		int					_port;
 		struct sockaddr_in			_host;
 		std::string				_servername;
@@ -47,11 +57,22 @@ class Server
         	struct sockaddr_in	 		_serverIP;
         	int     				_listenFD;
 
+
 	public:
 		Server();
 		Server(const Server &copy);
 		Server	&operator=(const Server &copy);
 		~Server();
+
+		////////////////////////////////////<hb1>////////////
+		Server(int port) : _port(port) 
+		{
+        // Initialize other server properties if needed
+    	}
+
+		void initServer();
+		void startIOmultiplexing();
+		////////////////////////////////////<hb2>////////////
 
 		void	setPort(int p);
 		void	setHost(struct sockaddr_in host);

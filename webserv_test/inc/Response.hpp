@@ -54,10 +54,10 @@ class Response
 		std::string				_responseBody;
 		std::string				_location;
 		short					_code;
-		char					*_response;
+		// char					*_response;
 
 		int					_cgi;
-		int					_cgiFD[2];
+		// int					_cgiFD[2];
 		size_t					_cgiLen;
 		bool					_autoIndex;
 		std::map<std::string, std::string>	_fileTypes;

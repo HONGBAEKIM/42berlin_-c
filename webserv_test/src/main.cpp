@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agrun <agrun@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: hongbaki <hongbaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 11:09:41 by agrun             #+#    #+#             */
-/*   Updated: 2023/12/15 11:09:44 by agrun            ###   ########.fr       */
+/*   Updated: 2024/01/13 15:34:15 by hongbaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ int	main(int argc, char **argv)
 		ConfigFile cfg(argv[1]);
 		std::map<size_t, Server*>::iterator it = cfg.getServers();	//Test-Client using the first Server-
 		Client tester(it);						//instance from within the container
+		
+
+		//////////////////<hb1>////////
+		int port = 8080; // Example port
+		Server myServer(port);
+		myServer.initServer();
+		myServer.startIOmultiplexing(); // Call this method to start the I/O multiplexing loop
+		//////////////////<hb2>////////
 	}
 	catch (const std::exception &e)
 	{
