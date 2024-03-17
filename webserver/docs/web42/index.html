@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hongpage</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Style to display links horizontally */
+        .horizontal-links pages {
+            display: inline-block;
+            margin-right: 20px; /* Adjust the spacing between links as needed */
+            text-decoration: none;
+            color: #000; /* Adjust link color as needed */
+        }
+
+        /* CSS to make the cursor pointer when hovering over <pages> element */
+        pages {
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <!--github-->
+    <h1><a href="https://github.com/HONGBAEKIM/webserv" target="_blank" title="code yo">
+        github_webserv
+    </a></h1>
+    <br>
+	
+    <hr>
+    <p><b><h1>Welcome to our little testserver!</b></h1>
+	
+  	
+
+	
+    <br>
+    <br>
+
+    
+
+	<br>
+    <div class="horizontal-links">    
+        <!--page2-->
+        <pages href="page2.html" target="_blank" title="Go to page 2">
+            <h3>You know me?</h3>
+        </pages>
+        
+        <!-- Link to page 3 -->
+        <pages href="upload.html" target="_self" title="Go to page 3">
+            <h2>Upload</h2>
+        </pages>
+
+        <!-- Link to page 4 -->
+        <pages href="page4.html" target="_self" title="Go to page 4">
+                <h2>Go to page 4</h2>
+        </pages>
+    </div>
+
+    <!-- JavaScript to handle click event and redirect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all custom pages elements
+            var pagesElements = document.querySelectorAll('pages');
+
+            // Attach click event listener to each custom pages element
+            pagesElements.forEach(function(pagesElement) {
+                pagesElement.addEventListener('click', function() {
+                    // Get the href attribute value of the clicked element
+                    var href = this.getAttribute('href');
+
+                    // Redirect to the specified href
+                    window.open(href, '_blank');
+                });
+            });
+        });
+    </script>
+
+    <!-- JavaScript to handle click event and redirect -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all custom pages elements
+            var pagesElements = document.querySelectorAll('pages');
+
+            // Attach click event listener to each custom pages element
+            pagesElements.forEach(function(pagesElement) {
+                pagesElement.addEventListener('click', function() {
+                    // Get the href attribute value of the clicked element
+                    var href = this.getAttribute('href');
+
+                    // Redirect to the specified href
+                    window.location.href = href;
+                });
+            });
+        });
+    </script> -->
+
+
+</body>
+<br>
+<a href="https://www.youtube.com/watch?v=HD13eq_Pmp8" target="_blank" title="Quick introduction to HTML">
+    Quick introduction to HTML
+</a>
+</html>

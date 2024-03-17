@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+</head>
+<body>
+    <h1 id="time"></h1>
+
+    <script>
+        // Function to make an AJAX request to time.py and update the time display
+        function updateTime() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("time").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "cgi-bin/today_time.py", true);
+            xhttp.send();
+        }
+
+        // Update time initially and set interval to update it every second
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
