@@ -45,9 +45,52 @@ Make nginx custom file and link hongbaki to sites-enabled file
 Because /etc/nginx/nginx.conf includes /etc/nginx/sites-enabled/*
 
 
+
 ```bash
 sudo ln -s /etc/nginx/sites-available/hongbaki /etc/nginx/sites-enabled/
 ```
+
+This is my hongbaki
+
+```bash
+hongbaki@debian:/etc/nginx/sites-available$ cat hongbaki   
+server {
+    listen 80;
+    server_name hongbaki.1337.be;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+
+	server_name hongbaki.1337.be;
+	#	server_name localhost;
+
+	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+	ssl_protocols TLSv1.3;
+
+	index index.php;
+	root /var/www/html;
+
+	location ~ [^/]\\.php(/|$) {
+        try_files $uri =404;
+        #fastcgi_pass wordpress:9000;
+        #include fastcgi_params;
+        #fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+```
+
+
+
 
 Before test nginx always  
 ```bash
