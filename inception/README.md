@@ -30,7 +30,7 @@ Launch nginx
 http://nginx.org/en/linux_packages.html
 
 ```bash
-sudo apt update && sudo apt upgrade && sudo apt install nginx
+sudo apt update -y && sudo apt upgrade -y && sudo apt install nginx -y
 ```
   
 http to https  
@@ -54,18 +54,21 @@ This is my hongbaki
 
 ```bash
 hongbaki@debian:/etc/nginx/sites-available$ cat hongbaki   
-server {
+server 
+{
     listen 80;
     server_name hongbaki.1337.be;
 
-    location / {
+    location / 
+    {
         return 301 https://$host$request_uri;
     }
 }
 
 
 
-server {
+server 
+{
 	listen 443 ssl;
 	listen [::]:443 ssl;
 
@@ -80,7 +83,8 @@ server {
 	index index.php;
 	root /var/www/html;
 
-	location ~ [^/]\\.php(/|$) {
+	location ~ [^/]\\.php(/|$) 
+    {
         try_files $uri =404;
         #fastcgi_pass wordpress:9000;
         #include fastcgi_params;
@@ -89,21 +93,23 @@ server {
 }
 ```
 
-
-
-
 Before test nginx always  
 ```bash
 sudo systemctl restart nginx
 sudo nginx -t
 ```
 
-
 Now you can see   
 'Welcome to nginx!'  
 when you open browser   
 'http://localhost/index.nginx-debian.html'  
-
+      
+      
+Mariadb
+  
+```bash
+sudo apt update -y && sudo apt upgrade -y && sudo apt-get install mariadb-server -y
+```
 
 
 
