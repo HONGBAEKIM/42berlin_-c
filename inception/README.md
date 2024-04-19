@@ -1,5 +1,24 @@
-install VM  
+# install VM  
 https://foufou.tistory.com/62
+
+
+```bash
+su
+apt-get install vim
+vim /etc/sudoers
+```  
+
+Add #User privilege specification option
+```bash
+hongbaki ALL=(ALL:ALL) ALL
+```  
+
+```bash
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install build-essential module-assistant
+sudo m-a prepare
+```  
+
 
 
 
@@ -16,13 +35,111 @@ sudo ./VBoxLinuxAdditions.run
 ```
 
 
-Genaral guide  
-https://github.com/vbachele/Inception?tab=readme-ov-file
+\\/\\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/!
+
+
+# Genaral guide  
+
+1. https://github.com/vbachele/Inception?tab=readme-ov-file
+
+2. https://github.com/Theo2lt/Inception
+
+3. https://medium.com/@ssterdev/inception-42-project-part-ii-19a06962cf3b  
 
 
 
+Docker youtube
+1. https://www.youtube.com/watch?v=Ps8HDIAyPD0&list=PLuHgQVnccGMDeMJsGq2O-55Ymtx0IdKWf  
+
+2. https://www.youtube.com/watch?v=0kQC19w0gTI  
+
+3. https://www.youtube.com/watch?v=EK6iYRCIjYs      
+
+    
 Launch Docker Desktop  
 https://docs.docker.com/engine/install/debian/#install-using-the-repository
+
+
+```bash
+sudo docker cp wp-php:/etc/php/8.2/fpm/pool.d/www.conf ./requirement/wordpress/.
+sudo docker cp nginx:/etc/nginx/sites-available/default ./requirement/nginx/.
+```
+
+```bash
+
+sudo lsof -i :80
+
+sudo kill -9 945 946 947 948 949
+
+
+docker image ls -a
+
+docker rmi $(docker images -f "dangling=true" -q)
+docker rmi -f $(docker images -q)
+
+
+docker container ls -a
+
+docker compose up --build
+
+sudo docker compose up --build -d
+
+
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+
+sudo docker stop $(sudo docker ps -aq) && sudo docker rm $(sudo docker ps -aq)
+
+docker build -t my .
+docker run -d --name nginx_c -p 8080:80 nginx
+docker run -d -p 8080:80 nginx
+
+```
+
+
+
+
+
+
+
+```bash
+docker network ls
+docker network inspect [network_name]
+
+docker network inspect srcs_default
+
+
+
+SELECT user, host, authentication_string FROM mysql.user;
+
+
+FLUSH PRIVILEGES;
+
+```
+
+
+
+```bash
+docker exec -it mariadb bash
+mysql
+SHOW DATABASES;
+SHOW TABLES;
+CREATE DATABASE WordPress;
+USE WordPress;
+
+SELECT DATABASE();
+SELECT user, host FROM mysql.user;
+
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+```
+
 
 
 
@@ -110,6 +227,10 @@ Mariadb
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt-get install mariadb-server -y
 ```
+
+
+
+
 
 
 
