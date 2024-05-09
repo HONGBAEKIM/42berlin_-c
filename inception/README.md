@@ -74,8 +74,8 @@ sudo kill -9 945 946 947 948 949
 
 docker image ls -a
 
-docker rmi $(docker images -f "dangling=true" -q)
-docker rmi -f $(docker images -q)
+
+docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi
 
 
 docker container ls -a
@@ -89,8 +89,8 @@ docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
 sudo docker stop $(sudo docker ps -aq) && sudo docker rm $(sudo docker ps -aq)
 
-docker build -t my .
-docker run -d --name nginx_c -p 8080:80 nginx
+docker build -t nginx .
+docker run -d --name nginx -p 8080:80 nginx
 docker run -d -p 8080:80 nginx
 
 ```
@@ -154,7 +154,7 @@ http to https
 download .key
 
 ```bash
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=MO/L=KH/O=1337/OU=student/CN=hongbaki.1337.be"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=MO/L=KH/O=42/OU=student/CN=hongbaki.42.fr"
 ```
 
 
@@ -174,7 +174,7 @@ hongbaki@debian:/etc/nginx/sites-available$ cat hongbaki
 server 
 {
     listen 80;
-    server_name hongbaki.1337.be;
+    server_name hongbaki.42.fr;
 
     location / 
     {
