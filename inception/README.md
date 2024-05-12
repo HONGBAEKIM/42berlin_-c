@@ -236,6 +236,18 @@ sudo apt update -y && sudo apt upgrade -y && sudo apt-get install mariadb-server
 
  
 
+Mysql -u root -p
+
+Show databases;
+
+use hongbakidb;
+
+Show tables;
+Select * from wp_comments;
+
+
+
+
 
 
 
