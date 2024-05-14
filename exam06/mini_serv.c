@@ -127,6 +127,7 @@ int		create_socket()
 	max_fd = socket(AF_INET, SOCK_STREAM, 0);
 	if (max_fd < 0)
 		fatal_error();
+	//add the socket file descriptor to the afds set
 	FD_SET(max_fd, &afds);
 	return max_fd;
 }
@@ -138,7 +139,8 @@ int		main(int ac, char **av)
 		write(2, "Wrong number of arguments\n", 26);
 		exit(1);
 	}
-
+	//Initializing afds before adding any file descriptors ensures 
+	//that it is properly initialized and ready for use. 
 	FD_ZERO(&afds);
 	int sockfd = create_socket();
 
