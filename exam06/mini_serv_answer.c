@@ -97,7 +97,8 @@ void	notify_other(int author, char *str)
 
 void	register_client(int fd) 
 {
-	max_fd = fd > max_fd ? fd : max_fd;
+	if (fd > max_fd)
+		max_fd = fd;
 	ids[fd] = count++;
 	msgs[fd] = NULL;
 	FD_SET(fd, &afds);
